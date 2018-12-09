@@ -1,0 +1,23 @@
+PODS:
+  - FSCryptor (0.0.1):
+    - FSKit
+  - FSKit (1.3.2.2)
+
+DEPENDENCIES:
+  - FSCryptor (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - FSKit
+
+EXTERNAL SOURCES:
+  FSCryptor:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  FSCryptor: 363e516db4d3f33453d278d110db3f8c13f6da33
+  FSKit: 1578169720d621fb12b806a8d0faf8ba95afb0e2
+
+PODFILE CHECKSUM: fb7978605556d08023136fcf4f931a76768d2a1b
+
+COCOAPODS: 1.6.0.beta.2

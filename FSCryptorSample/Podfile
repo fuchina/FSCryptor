@@ -1,0 +1,8 @@
+platform:ios,'8.2'
+
+target 'FSCryptorSample' do
+
+  pod 'FSCryptor', :path => '../'
+
+end
+
