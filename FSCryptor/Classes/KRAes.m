@@ -24,7 +24,7 @@
     CCCryptorStatus cryptStatus = CCCrypt(
                            isEncrypt?kCCEncrypt:kCCDecrypt,
                            kCCAlgorithmAES128, // fdd.AES 是一个迭代的、对称密钥分组的密码，它可以使用128、192 和 256 位密钥，并且用 128 位（16字节）分组加密和解密数据
-                           kCCOptionPKCS7Padding | kCCOptionECBMode,
+                           kCCOptionPKCS7Padding | kCCOptionECBMode,// 如果我们第三个变量写成kCCOptionPKCS7Padding|kCCOptionECBMode，就表示运用了ECB加密模式，并且使用PKCS7Padding的填充模式进行加密。所以单单使用kCCOptionPKCS7Padding就代表了CBC加密模式。
                            keyPattern,
                            kCCKeySizeAES256,
                            NULL,
