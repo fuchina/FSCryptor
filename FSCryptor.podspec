@@ -11,12 +11,15 @@ Pod::Spec.new do |s|
   s.author           = { 'fudon' => '1245102331@qq.com' }
   
   s.source           = { :git => 'https://github.com/fuchina/FSCryptor.git', :tag => s.version.to_s}
+
+  s.ios.deployment_target = '12.0'
   
-  s.source_files = 'FSCryptor/Classes/*.{h,m}'
+  s.source_files = 'FSCryptor/**/*'
+  
+  s.swift_version = '5.9'
 
   s.dependency   'FSKit'
 
-  s.ios.deployment_target = '8.2'
-  s.frameworks = 'UIKit'  
+  s.frameworks = 'UIKit'
 
 end
