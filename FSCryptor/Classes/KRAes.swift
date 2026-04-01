@@ -8,15 +8,12 @@
 import Foundation
 import CommonCrypto
 
-@objcMembers
 open class KRAes: NSObject {
 
-    @objc(encryptAES256WithData:password:)
     public static func encryptAES256(with data: Data, password key: String) -> Data? {
         aes256(with: data, key: key, isEncrypt: true)
     }
 
-    @objc(decryptAES256WithData:password:)
     public static func decryptAES256(with data: Data, password key: String) -> Data? {
         aes256(with: data, key: key, isEncrypt: false)
     }

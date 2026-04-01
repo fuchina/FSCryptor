@@ -8,10 +8,8 @@
 import Foundation
 import Security
 
-@objcMembers
 open class RSA: NSObject {
 
-    @objc(encryptString:publicKey:)
     public static func encryptString(_ str: String, publicKey pubKey: String) -> String {
         guard let data = str.data(using: .utf8),
               let encrypted = encryptData(data, publicKey: pubKey) else {
@@ -20,7 +18,6 @@ open class RSA: NSObject {
         return encrypted.base64EncodedString(options: [])
     }
 
-    @objc(encryptData:publicKey:)
     public static func encryptData(_ data: Data, publicKey pubKey: String) -> Data? {
         guard let keyRef = addPublicKey(pubKey) else {
             return nil
@@ -43,7 +40,6 @@ open class RSA: NSObject {
         return encryptData(data, withKeyRef: keyRef)
     }
 
-    @objc(decryptString:publicKey:)
     public static func decryptString(_ str: String, publicKey pubKey: String) -> String {
         guard let data = Data(base64Encoded: str, options: .ignoreUnknownCharacters),
               let decrypted = decryptData(data, publicKey: pubKey) else {
@@ -52,7 +48,6 @@ open class RSA: NSObject {
         return String(data: decrypted, encoding: .utf8) ?? ""
     }
 
-    @objc(decryptData:publicKey:)
     public static func decryptData(_ data: Data, publicKey pubKey: String) -> Data? {
         guard let keyRef = addPublicKey(pubKey) else {
             return nil
@@ -60,7 +55,6 @@ open class RSA: NSObject {
         return decryptData(data, withKeyRef: keyRef)
     }
 
-    @objc(decryptString:privateKey:)
     public static func decryptString(_ str: String, privateKey privKey: String) -> String {
         guard let data = Data(base64Encoded: str, options: .ignoreUnknownCharacters),
               let decrypted = decryptData(data, privateKey: privKey) else {
@@ -69,7 +63,6 @@ open class RSA: NSObject {
         return String(data: decrypted, encoding: .utf8) ?? ""
     }
 
-    @objc(decryptData:privateKey:)
     public static func decryptData(_ data: Data, privateKey privKey: String) -> Data? {
         guard let keyRef = addPrivateKey(privKey) else {
             return nil

@@ -7,7 +7,6 @@
 
 import Foundation
 
-@objcMembers
 open class GTMBase64: NSObject {
 
     public static func encode(_ data: Data) -> Data? {
@@ -18,43 +17,35 @@ open class GTMBase64: NSObject {
         decodeString(string)
     }
 
-    @objc(encodeData:)
     public static func encodeData(_ data: Data) -> Data? {
         data.base64EncodedData(options: [])
     }
 
-    @objc(decodeData:)
     public static func decodeData(_ data: Data) -> Data? {
         decodeBytes((data as NSData).bytes, length: UInt(data.count))
     }
 
-    @objc(encodeBytes:length:)
     public static func encodeBytes(_ bytes: UnsafeRawPointer, length: UInt) -> Data? {
         let data = Data(bytes: bytes, count: Int(length))
         return encodeData(data)
     }
 
-    @objc(decodeBytes:length:)
     public static func decodeBytes(_ bytes: UnsafeRawPointer, length: UInt) -> Data? {
         decodeBytesInternal(bytes, length: Int(length), webSafe: false, requirePadding: true)
     }
 
-    @objc(stringByEncodingData:)
     public static func stringByEncodingData(_ data: Data) -> String? {
         encodeData(data).flatMap { String(data: $0, encoding: .utf8) }
     }
 
-    @objc(stringByEncodingBytes:length:)
     public static func stringByEncodingBytes(_ bytes: UnsafeRawPointer, length: UInt) -> String? {
         encodeBytes(bytes, length: length).flatMap { String(data: $0, encoding: .utf8) }
     }
 
-    @objc(decodeString:)
     public static func decodeString(_ string: String) -> Data? {
         decodeStringInternal(string, webSafe: false, requirePadding: true)
     }
 
-    @objc(webSafeEncodeData:padded:)
     public static func webSafeEncodeData(_ data: Data, padded: Bool) -> Data? {
         let base64 = data.base64EncodedString(options: [])
         let webSafe = base64
@@ -64,33 +55,27 @@ open class GTMBase64: NSObject {
         return result.data(using: .utf8)
     }
 
-    @objc(webSafeDecodeData:)
     public static func webSafeDecodeData(_ data: Data) -> Data? {
         webSafeDecodeBytes((data as NSData).bytes, length: UInt(data.count))
     }
 
-    @objc(webSafeEncodeBytes:length:padded:)
     public static func webSafeEncodeBytes(_ bytes: UnsafeRawPointer, length: UInt, padded: Bool) -> Data? {
         let data = Data(bytes: bytes, count: Int(length))
         return webSafeEncodeData(data, padded: padded)
     }
 
-    @objc(webSafeDecodeBytes:length:)
     public static func webSafeDecodeBytes(_ bytes: UnsafeRawPointer, length: UInt) -> Data? {
         decodeBytesInternal(bytes, length: Int(length), webSafe: true, requirePadding: false)
     }
 
-    @objc(stringByWebSafeEncodingData:padded:)
     public static func stringByWebSafeEncodingData(_ data: Data, padded: Bool) -> String? {
         webSafeEncodeData(data, padded: padded).flatMap { String(data: $0, encoding: .utf8) }
     }
 
-    @objc(stringByWebSafeEncodingBytes:length:padded:)
     public static func stringByWebSafeEncodingBytes(_ bytes: UnsafeRawPointer, length: UInt, padded: Bool) -> String? {
         webSafeEncodeBytes(bytes, length: length, padded: padded).flatMap { String(data: $0, encoding: .utf8) }
     }
 
-    @objc(webSafeDecodeString:)
     public static func webSafeDecodeString(_ string: String) -> Data? {
         decodeStringInternal(string, webSafe: true, requirePadding: false)
     }
